@@ -1,0 +1,2 @@
+Directory used to copy source files and run the tests with regress.sh.
+Do not commit any of the files in this directory to the repository.
