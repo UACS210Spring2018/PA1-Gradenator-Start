@@ -5,4 +5,4 @@ script: ./grade.sh PA1Main PublicTestCases
 notifications:
   on_success: always
   email:
-    - your.netid@email.arizona.edu
+    - yuefengli@email.arizona.edu
