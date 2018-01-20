@@ -61,13 +61,18 @@ then
         
 		java $main $infile > out #runs current test and throws captures output
 
+        # For PA1, truncating all of the floating point numbers to 2 decimal places.
+        perl -pe 's/[-+]?\d*(?:\.?\d|\d\.)\d*(?:[eE][-+]?\d+)?/sprintf("%.2f",$&)/ge' out > trunc_out
+        perl -pe 's/[-+]?\d*(?:\.?\d|\d\.)\d*(?:[eE][-+]?\d+)?/sprintf("%.2f",$&)/ge' "../$inputdir/$(basename $infile .in).out" > trunc_expected
+
         #checks if there is a difference between "user output" and "test output"
         #if there is not add one to TESTS_PASSED and print that they passed
         #if not print that they failed and show the failing diff
         #
         #(note) the redirecting to silent is only there to keep the diff op
         #from displaying to stdout
-        if diff -B -Z -q out "../$inputdir/$(basename $infile .in).out" > silent
+        #if diff -B -Z -q out "../$inputdir/$(basename $infile .in).out" > silent
+        if diff -B -w -q trunc_out trunc_expected > silent
         then
             echo "Passed $main test \"$(basename $infile .in).in\""
             echo ""
@@ -75,7 +80,7 @@ then
         else
             echo Failed $main test \"$(basename $infile .in).in\"
             echo "*********** OUTPUT: Actual output followed by expected."
-            diff -B -Z out "../$inputdir/$(basename $infile .in).out"
+            diff -B -w trunc_out trunc_expected
             echo  "*******************************"
             echo ""
         fi
