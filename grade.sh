@@ -101,6 +101,6 @@ then
 # Not enough parameters given to script.
 else
     echo
-    echo "usage: ./grade.sh PA1Main PublicTestCases"
+    echo "example usage: ./grade.sh PA1Main PublicTestCases"
 fi
 echo
